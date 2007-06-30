@@ -16,7 +16,7 @@ Source0:   %{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
 BuildRequires:   automake gtk-doc
-BuildRequires:	 ruby-devel ruby-gnome2-devel
+BuildRequires:	 ruby-devel ruby-gnome2-devel python-gobject-devel
 # (tv) for AM_PATH_GLIB_2_0:
 BuildRequires:	 glib2-devel
 
@@ -55,14 +55,14 @@ Headers of %{name} for development.
 
 %prep
 %setup -q
-cp /usr/share/automake-1.9/mkinstalldirs .
+#cp /usr/share/automake-1.9/mkinstalldirs .
 
 %build
 # force to regenerate configure
 ./autogen.sh
 
 %configure2_5x
-%make
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -71,6 +71,8 @@ rm -rf $RPM_BUILD_ROOT
 # remove unnecessary files
 rm -f $RPM_BUILD_ROOT/%{_includedir}/tomoe/tomoe-debug.h
 
+%{find_lang} %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -78,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 %postun -n %libname -p /sbin/ldconfig
 
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog
 %config(noreplace) %{_sysconfdir}/tomoe/config
@@ -88,16 +90,14 @@ rm -rf $RPM_BUILD_ROOT
 %files ruby
 %defattr(-,root,root)
 %doc COPYING
-/usr/lib/ruby/site_ruby/*/*.rb
-/usr/lib/ruby/site_ruby/*/*/*.so.0*
-
+%{ruby_sitelibdir}/*.rb
 
 %files -n %{libname}
 %defattr(-,root,root)
 %doc COPYING
 # uim-tomoe-gtk opens some devel files
 %{_libdir}/*.so.0*
-%{_libdir}/tomoe/module/*/*.so.0*
+#%{_libdir}/tomoe/module/*/*.so.0*
 
 %files -n %{develname}
 %defattr(-,root,root)
@@ -107,10 +107,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.la
 %{_libdir}/*.so
 
-/usr/lib/ruby/site_ruby/*/*/*.h
-/usr/lib/ruby/site_ruby/*/*/*.a
-/usr/lib/ruby/site_ruby/*/*/*.la
-/usr/lib/ruby/site_ruby/*/*/*.so
+%{ruby_sitearchdir}/*
+%{python_sitearch}/*
 %{_libdir}/tomoe/module/*/*.a
 %{_libdir}/tomoe/module/*/*.la
 %{_libdir}/tomoe/module/*/*.so
