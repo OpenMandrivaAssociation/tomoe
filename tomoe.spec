@@ -15,7 +15,7 @@ URL:       https://sourceforge.jp/projects/tomoe/
 Source0:   %{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
-BuildRequires:   automake gtk-doc
+BuildRequires:   automake gtk-doc intltool
 BuildRequires:	 ruby-devel ruby-gnome2-devel python-gobject-devel
 # (tv) for AM_PATH_GLIB_2_0:
 BuildRequires:	 glib2-devel
