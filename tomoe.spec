@@ -1,5 +1,5 @@
 %define version   0.6.0
-%define release   %mkrel 1
+%define release   %mkrel 2
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -15,10 +15,10 @@ URL:       https://sourceforge.jp/projects/tomoe/
 Source0:   %{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
-BuildRequires:   automake gtk-doc intltool
+BuildRequires:   automake intltool
 BuildRequires:	 ruby-devel ruby-gnome2-devel python-gobject-devel
 # (tv) for AM_PATH_GLIB_2_0:
-BuildRequires:	 glib2-devel
+BuildRequires:	 glib2-devel pygtk2.0-devel
 
 %description
 A program which does Japanese handwriting recognition.
@@ -112,4 +112,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/tomoe/module/*/*.a
 %{_libdir}/tomoe/module/*/*.la
 %{_libdir}/tomoe/module/*/*.so
-%{_libdir}/pkgconfig/*.pc
+%{_libdir}/pkgconfig/tomoe.pc
+%{_libdir}/pkgconfig/pytomoe.pc
