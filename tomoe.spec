@@ -1,5 +1,5 @@
 %define version   0.6.0
-%define release   %mkrel 2
+%define release   %mkrel 3
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -17,12 +17,22 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
 BuildRequires:   automake intltool gtk-doc
 BuildRequires:	 ruby-devel ruby-gnome2-devel python-gobject-devel
+BuildRequires:	 pygtk2.0-devel
 # (tv) for AM_PATH_GLIB_2_0:
-BuildRequires:	 glib2-devel pygtk2.0-devel
+BuildRequires:	 glib2-devel
 
 %description
 A program which does Japanese handwriting recognition.
 
+
+%package    python
+Summary:    Python binding of tomoe
+Group:      System/Internationalization
+Requires:   %{name} = %{version}
+Requires:   python
+
+%description python
+Python binding of tomoe.
 
 %package    ruby
 Summary:    Ruby binding of tomoe
@@ -52,7 +62,6 @@ Obsoletes:  %{libname}-devel
 %description -n %{develname}
 Headers of %{name} for development.
 
-
 %prep
 %setup -q
 #cp /usr/share/automake-1.9/mkinstalldirs .
@@ -67,9 +76,6 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
-
-# remove unnecessary files
-rm -f $RPM_BUILD_ROOT/%{_includedir}/tomoe/tomoe-debug.h
 
 %{find_lang} %{name}
 
@@ -87,17 +93,23 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/tomoe/*
 %{_datadir}/tomoe/*
 
+%files python
+%defattr(-,root,root)
+%doc COPYING
+%{python_sitearch}/*.so
+
 %files ruby
 %defattr(-,root,root)
 %doc COPYING
 %{ruby_sitelibdir}/*.rb
+%{ruby_sitelibdir}/*/*.so
 
 %files -n %{libname}
 %defattr(-,root,root)
 %doc COPYING
 # uim-tomoe-gtk opens some devel files
 %{_libdir}/*.so.0*
-#%{_libdir}/tomoe/module/*/*.so.0*
+%{_libdir}/tomoe/module/*/*.so
 
 %files -n %{develname}
 %defattr(-,root,root)
