@@ -13,6 +13,7 @@ Group:     System/Internationalization
 License:   LGPL
 URL:       https://sourceforge.jp/projects/tomoe/
 Source0:   %{name}-%{version}.tar.bz2
+Patch0:	   tomoe-0.6.0-workaround-gcc42-exhausting-memory-when-compiling.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
 BuildRequires:   automake intltool gtk-doc
@@ -66,9 +67,13 @@ Headers of %{name} for development.
 %setup -q
 #cp /usr/share/automake-1.9/mkinstalldirs .
 
-%build
 # force to regenerate configure
 ./autogen.sh
+
+# patch only on Makefile.in, not Makefile.am, so autogen.sh must be called beforehand
+%patch0 -p1
+
+%build
 
 %configure2_5x
 %make
