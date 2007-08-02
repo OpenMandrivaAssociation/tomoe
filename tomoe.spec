@@ -48,6 +48,7 @@ Ruby binding of tomoe.
 Summary:    Tomoe library
 Group:      System/Internationalization
 Provides:   %{libname_orig} = %{version}-%{release}
+Conflicts:  %{name}-devel < 0.6.0-3mdv
 
 %description -n %{libname}
 tomoe library.
