@@ -1,5 +1,5 @@
 %define version   0.6.0
-%define release   %mkrel 4
+%define release   %mkrel 5
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -48,7 +48,7 @@ Ruby binding of tomoe.
 Summary:    Tomoe library
 Group:      System/Internationalization
 Provides:   %{libname_orig} = %{version}-%{release}
-Conflicts:  %{name}-devel < 0.6.0-3mdv
+Conflicts:  %{name}-devel < 0.6.0-5mdv
 
 %description -n %{libname}
 tomoe library.
