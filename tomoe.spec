@@ -1,5 +1,5 @@
 %define version   0.6.0
-%define release   %mkrel 3
+%define release   %mkrel 4
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -125,10 +125,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.la
 %{_libdir}/*.so
 
-%{ruby_sitearchdir}/*
-%{python_sitearch}/*
+%{ruby_sitearchdir}/*.h
+%{ruby_sitearchdir}/*.a
+%{ruby_sitearchdir}/*.la
+%{python_sitearch}/*.a
+%{python_sitearch}/*.la
 %{_libdir}/tomoe/module/*/*.a
 %{_libdir}/tomoe/module/*/*.la
-%{_libdir}/tomoe/module/*/*.so
 %{_libdir}/pkgconfig/tomoe.pc
 %{_libdir}/pkgconfig/pytomoe.pc
