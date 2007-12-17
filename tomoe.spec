@@ -14,7 +14,6 @@ License:   LGPL
 URL:       https://sourceforge.jp/projects/tomoe/
 Source0:   %{name}-%{version}.tar.bz2
 Patch0:	   tomoe-0.6.0-workaround-gcc42-exhausting-memory-when-compiling.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
 BuildRequires:   automake intltool gtk-doc
 BuildRequires:	 ruby-devel ruby-gnome2-devel python-gobject-devel
