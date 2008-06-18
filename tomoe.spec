@@ -1,5 +1,5 @@
 %define version   0.6.0
-%define release   %mkrel 5
+%define release   %mkrel 6
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
