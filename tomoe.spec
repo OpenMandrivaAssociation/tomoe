@@ -1,7 +1,6 @@
 %define version   0.6.0
 %define release   %mkrel 7
 
-%define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
 %define develname %mklibname -d %{name}
 
@@ -10,10 +9,11 @@ Summary:   A program which does Japanese handwriting recognition
 Version:   %{version}
 Release:   %{release}
 Group:     System/Internationalization
-License:   LGPL
+License:   LGPLv2+
 URL:       https://sourceforge.jp/projects/tomoe/
 Source0:   %{name}-%{version}.tar.bz2
 Patch0:	   tomoe-0.6.0-workaround-gcc42-exhausting-memory-when-compiling.patch
+Patch1:	   tomoe-0.6.0-fix-str-fmt.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
 BuildRequires:   automake intltool gtk-doc
@@ -47,7 +47,6 @@ Ruby binding of tomoe.
 %package -n %{libname}
 Summary:    Tomoe library
 Group:      System/Internationalization
-Provides:   %{libname_orig} = %{version}-%{release}
 Conflicts:  %{name}-devel < 0.6.0-5mdv
 
 %description -n %{libname}
@@ -58,7 +57,6 @@ Summary:    Headers of %{name} for development
 Group:      Development/C
 Requires:   %{libname} = %{version}
 Provides:   %{name}-devel = %{version}-%{release}
-Provides:   %{libname_orig}-devel = %{version}-%{release}
 Obsoletes:  %{libname}-devel
 
 %description -n %{develname}
@@ -66,13 +64,13 @@ Headers of %{name} for development.
 
 %prep
 %setup -q
-#cp /usr/share/automake-1.9/mkinstalldirs .
 
 # force to regenerate configure
 ./autogen.sh
 
 # patch only on Makefile.in, not Makefile.am, so autogen.sh must be called beforehand
 %patch0 -p1
+%patch1 -p0
 
 %build
 
