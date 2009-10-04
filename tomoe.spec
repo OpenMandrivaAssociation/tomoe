@@ -1,5 +1,5 @@
 %define version   0.6.0
-%define release   %mkrel 8
+%define release   %mkrel 9
 
 %define libname %mklibname %{name} 0
 %define develname %mklibname -d %{name}
@@ -12,8 +12,8 @@ Group:     System/Internationalization
 License:   LGPLv2+
 URL:       https://sourceforge.jp/projects/tomoe/
 Source0:   %{name}-%{version}.tar.bz2
-Patch0:	   tomoe-0.6.0-workaround-gcc42-exhausting-memory-when-compiling.patch
 Patch1:	   tomoe-0.6.0-fix-str-fmt.patch
+Patch2:    tomoe-0.6.0-linkage.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
 BuildRequires:   automake intltool gtk-doc
@@ -24,7 +24,6 @@ BuildRequires:	 glib2-devel
 
 %description
 A program which does Japanese handwriting recognition.
-
 
 %package    python
 Summary:    Python binding of tomoe
@@ -64,16 +63,10 @@ Headers of %{name} for development.
 
 %prep
 %setup -q
-
-# force to regenerate configure
-./autogen.sh
-
-# patch only on Makefile.in, not Makefile.am, so autogen.sh must be called beforehand
-%patch0 -p1
 %patch1 -p0
+%patch2 -p0
 
 %build
-
 %configure2_5x
 %make
 
