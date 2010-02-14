@@ -1,5 +1,5 @@
 %define version   0.6.0
-%define release   %mkrel 9
+%define release   %mkrel 10
 
 %define libname %mklibname %{name} 0
 %define develname %mklibname -d %{name}
@@ -14,6 +14,7 @@ URL:       https://sourceforge.jp/projects/tomoe/
 Source0:   %{name}-%{version}.tar.bz2
 Patch1:	   tomoe-0.6.0-fix-str-fmt.patch
 Patch2:    tomoe-0.6.0-linkage.patch
+Patch3:    tomoe-0.6.0-undefined-class.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires:        %{libname} = %{version}
 BuildRequires:   automake intltool gtk-doc
@@ -65,8 +66,10 @@ Headers of %{name} for development.
 %setup -q
 %patch1 -p0
 %patch2 -p0
+%patch3 -p0
 
 %build
+autoreconf -fi
 %configure2_5x
 %make
 
