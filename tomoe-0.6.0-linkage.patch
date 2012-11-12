@@ -1,0 +1,30 @@
+--- module/dict/Makefile.am.link	2010-02-14 19:42:05.000000000 +0100
++++ module/dict/Makefile.am	2010-02-14 19:42:33.000000000 +0100
+@@ -34,7 +34,7 @@
+ 
+ LIBADD = $(TOMOE_LIBS)			\
+ 	$(top_builddir)/lib/libtomoe.la
+-LDFLAGS =							\
++LDFLAGS +=							\
+   -rpath $(dict_moduledir) -avoid-version -module		\
+   -export-dynamic $(no_undefined) $(LIBTOOL_EXPORT_OPTIONS)
+ 
+--- module/recognizer/Makefile.am.link	2007-04-10 09:24:20.000000000 +0200
++++ module/recognizer/Makefile.am	2010-02-14 19:51:44.000000000 +0100
+@@ -23,7 +23,7 @@
+ AM_CPPFLAGS =
+ INCLUDES = $(TOMOE_CFLAGS)
+ 
+-LDFLAGS =							\
++LDFLAGS +=							\
+   -rpath $(recognizer_moduledir) -avoid-version -module		\
+   -export-dynamic $(no_undefined) $(LIBTOOL_EXPORT_OPTIONS)
+ 
+@@ -35,6 +35,4 @@
+ 	tomoe-recognizer-simple-logic.c				\
+ 	tomoe-recognizer-simple-logic.h
+ 
+-simple_la_LD_ADD = -lm
+-
+-simple_la_LIBADD = $(TOMOE_LIBS)
++simple_la_LIBADD = $(top_builddir)/lib/libtomoe.la -lm
