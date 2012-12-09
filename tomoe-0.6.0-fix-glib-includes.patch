@@ -1,0 +1,24 @@
+diff -Naur tomoe-0.6.0.orig/lib/glib-utils.h tomoe-0.6.0/lib/glib-utils.h
+--- tomoe-0.6.0.orig/lib/glib-utils.h	2012-09-17 10:05:05.555684202 +0400
++++ tomoe-0.6.0/lib/glib-utils.h	2012-09-17 10:06:32.814552936 +0400
+@@ -28,7 +28,7 @@
+ #include "config.h"
+ #endif /* HAVE_CONFIG_H */
+ 
+-#include <glib/garray.h>
++#include <glib.h>
+ #include <glib/gi18n-lib.h>
+ #include "glib-compat-file-utilities.h"
+ #include "glib-compat-key-file.h"
+diff -Naur tomoe-0.6.0.orig/lib/tomoe.c tomoe-0.6.0/lib/tomoe.c
+--- tomoe-0.6.0.orig/lib/tomoe.c	2012-09-17 10:05:05.555684202 +0400
++++ tomoe-0.6.0/lib/tomoe.c	2012-09-17 10:05:37.732742111 +0400
+@@ -26,7 +26,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <glib/garray.h>
++#include <glib.h>
+ #include "tomoe.h"
+ 
+ static gboolean initialized = FALSE;
