@@ -1,13 +1,10 @@
-%define version   0.6.0
-%define release   13
-
 %define libname %mklibname %{name} 0
 %define develname %mklibname -d %{name}
 
 Name:      tomoe
 Summary:   A program which does Japanese handwriting recognition
-Version:   %{version}
-Release:   %{release}
+Version:   0.6.0
+Release:   14
 Group:     System/Internationalization
 License:   LGPLv2+
 URL:       https://sourceforge.jp/projects/tomoe/
@@ -16,6 +13,7 @@ Patch1:	   tomoe-0.6.0-fix-str-fmt.patch
 Patch2:    tomoe-0.6.0-linkage.patch
 Patch3:    tomoe-0.6.0-undefined-class.patch
 Patch4:    tomoe-0.6.0-fix-glib-includes.patch
+Patch5:    tomoe-automake-1.13.patch
 Requires:        %{libname} = %{version}
 BuildRequires:   automake intltool gtk-doc
 #BuildRequires:	 ruby-devel ruby-gnome2-devel
@@ -69,6 +67,7 @@ Headers of %{name} for development.
 %patch2 -p0
 %patch3 -p0
 %patch4 -p1
+%patch5 -p1 -b .am13~
 
 %build
 autoreconf -fi

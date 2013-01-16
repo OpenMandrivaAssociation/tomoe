@@ -1,0 +1,13 @@
+--- tomoe-0.6.0/configure.ac.bero	2013-01-16 03:08:45.818288894 +0100
++++ tomoe-0.6.0/configure.ac	2013-01-16 03:08:50.721232503 +0100
+@@ -8,8 +8,8 @@ m4_define([tomoe_version],
+           [tomoe_major_version.tomoe_minor_version.tomoe_micro_version])
+ 
+ AC_INIT(tomoe, [tomoe_version])
+-AM_INIT_AUTOMAKE(tomoe, [tomoe_version])
+-AM_CONFIG_HEADER(config.h)
++AM_INIT_AUTOMAKE
++AC_CONFIG_HEADERS(config.h)
+ 
+ AC_ENABLE_SHARED(yes)
+ AC_ENABLE_STATIC(yes)
