@@ -5,7 +5,7 @@
 Summary:	A program which does Japanese handwriting recognition
 Name:		tomoe
 Version:	0.6.0
-Release:	18
+Release:	19
 Group:		System/Internationalization
 License:	LGPLv2+
 Url:		https://sourceforge.jp/projects/tomoe/
