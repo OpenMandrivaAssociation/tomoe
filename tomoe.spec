@@ -56,11 +56,12 @@ Headers of %{name} for development.
 autoreconf -fi
 
 %build
-%configure2_5x --disable-static
-%make
+export CC=gcc
+%configure --with-python=%__python2 PYTHON_VERSION=%py2_ver
+make pyexecdir=%python2_sitearch
 
 %install
-%makeinstall_std
+%makeinstall_std pyexecdir=%python2_sitearch
 
 %find_lang %{name}
 
@@ -71,7 +72,7 @@ autoreconf -fi
 %{_datadir}/tomoe/*
 
 %files python
-%{python_sitearch}/*.so
+%{python2_sitearch}/*.so
 
 %files -n %{libname}
 %{_libdir}/libtomoe.so.%{major}*
